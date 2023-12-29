@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CAR_SELLINGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="USER_INFO">
+    <Key>
+      <PropertyRef Name="USER_IDN" />
+    </Key>
+    <Property Name="USER_IDN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USER_EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="USER_FNAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="USER_LNAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="USER_PASSWORD" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="CAR_SELLINGModelStoreContainer">
+    <EntitySet Name="USER_INFO" EntityType="Self.USER_INFO" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
