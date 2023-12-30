@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WheelsOnDeals.Models.USER_INFO>
+
+@{
+    ViewBag.Title = "ListUsers";
+}
+
+<h2>ListUsers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Signup")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.USER_IDN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USER_EMAIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USER_FNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USER_LNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USER_PASSWORD)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER_IDN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER_EMAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER_FNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER_LNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER_PASSWORD)
+        </td>
+    </tr>
+}
+
+</table>
