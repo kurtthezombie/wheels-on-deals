@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CAR_SELLINGModelStoreContainer" CdmEntityContainer="AppDbContext">
+    <EntitySetMapping Name="USER_INFO">
+      <EntityTypeMapping TypeName="CAR_SELLINGModel.USER_INFO">
+        <MappingFragment StoreEntitySet="USER_INFO">
+          <ScalarProperty Name="USER_IDN" ColumnName="USER_IDN" />
+          <ScalarProperty Name="USER_EMAIL" ColumnName="USER_EMAIL" />
+          <ScalarProperty Name="USER_FNAME" ColumnName="USER_FNAME" />
+          <ScalarProperty Name="USER_LNAME" ColumnName="USER_LNAME" />
+          <ScalarProperty Name="USER_PASSWORD" ColumnName="USER_PASSWORD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarListings">
+      <EntityTypeMapping TypeName="CAR_SELLINGModel.CarListing">
+        <MappingFragment StoreEntitySet="CarListing">
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="CarDescription" ColumnName="CarDescription" />
+          <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="CarYear" ColumnName="CarYear" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Make" ColumnName="Make" />
+          <ScalarProperty Name="CarID" ColumnName="CarID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

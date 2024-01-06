@@ -1,0 +1,71 @@
+﻿@model IEnumerable<WheelsOnDeals.Models.CarListing>
+
+@{
+    ViewBag.Title = "MyListing";
+}
+
+<h5 class="display-5">My Listing</h5>
+
+<p>
+    @Html.ActionLink("+ Add Listing", "CreateListing", new {@class = "btn btn-primary"})
+</p>
+<table class="table p-3">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mileage)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Make)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mileage)
+        </td>
+
+        <td>
+            <img src="@item.ImageUrl" width="100"/>
+        </td>
+        <td>
+            @Html.ActionLink("✎", "EditListing", "Home", new {  id=item.CarID }, new { @class = "btn btn-secondary" })
+            @Html.ActionLink("Details", "MyListingDetails", new { id=item.CarID }, new { @class = "btn btn-warning" }) 
+            @Html.ActionLink("Delete", "DeleteListing", new { id=item.CarID }, new { @class = "btn btn-danger", onclick = "confirm('Delete listing " + item.CarID + "?')" })
+        </td>
+    </tr>
+}
+
+</table>

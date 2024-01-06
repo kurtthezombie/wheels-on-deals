@@ -133,16 +133,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CarListing.cs">
+      <DependentUpon>User.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\User.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>User.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>User.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -224,9 +222,17 @@
     </Content>
     <Content Include="Views\Home\Signup.cshtml" />
     <Content Include="Views\Home\ListUsers.cshtml" />
+    <Content Include="Views\Home\MyProfile.cshtml" />
+    <Content Include="Views\Home\EditProfile.cshtml" />
+    <Content Include="Views\Home\MyListing.cshtml" />
+    <Content Include="Views\Home\CreateListing.cshtml" />
+    <Content Include="Views\Home\EditListing.cshtml" />
+    <Content Include="Views\Home\MyListingDetails.cshtml" />
+    <Content Include="Views\Home\ListingDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>

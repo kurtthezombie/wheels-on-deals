@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm">
         <div class="container">
             @Html.ActionLink("Wheels On Deals", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
@@ -18,20 +18,24 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-
-                <ul class="nav navbar-nav text-end">
+                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     @if (Session["Session_UserEmail"] != null)
                     {
-                        <li><p class="text-white mt-2">Hello, @Session["Session_UserFirstName"]!</p></li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link text-end" })</li>
+                        <li class="nav-item">@Html.ActionLink("My Listings", "MyListing", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav ml-auto my-2 mt-3">
+                    @if (Session["Session_UserEmail"] != null)
+                    {
+                        <li class="nav-item"><p class="text-dark mt-2">Hello, @Html.ActionLink((string)Session["Session_UserFirstName"], "MyProfile", "Home", new { area = "", id = Convert.ToInt32(Session["Session_UserId"]) }, new { @class = "text-secondary mr-sm-3" })</p></li>
+
+                        <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "nav-link text-end text-danger", onclick = "return confirm('Are you sure you want to log out?');" })</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link text-end" })</li>
+                        <li class="nav-item">@Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link text-end btn btn-outline-light" })</li>
                     }
                 </ul>
             </div>
@@ -39,9 +43,9 @@
     </nav>
     <div class="container body-content mb-5">
         @RenderBody()
-        <hr />
-        <footer>
-            <p class="text-center">&copy; @DateTime.Now.Year - WheelsOnDeals</p>
+        <hr/>
+        <footer class="text-center">
+            <p class="mx-auto text-light w-25">&copy; @DateTime.Now.Year - WheelsOnDeals</p>
         </footer>
     </div>
 

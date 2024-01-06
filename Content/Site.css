@@ -17,4 +17,13 @@ input,
 select,
 textarea {
     max-width: 100%;
-} 
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    min-height: 100vh;
+    background-size: cover;
+    background-image: url('../Images/bg-image.png');
+}

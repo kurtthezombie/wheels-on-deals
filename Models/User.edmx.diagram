@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e1d3a422a10141038ab39c2d2648c821" Name="Diagram1">
         <EntityTypeShape EntityType="CAR_SELLINGModel.USER_INFO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CAR_SELLINGModel.CarListing" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="CAR_SELLINGModel.FK__CarListin__Owner__3F466844" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

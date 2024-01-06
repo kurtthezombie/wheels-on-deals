@@ -1,0 +1,90 @@
+﻿@model WheelsOnDeals.Models.CarListing
+
+@{
+    ViewBag.Title = "ListingDetails";
+}
+
+
+<div class="bg-light container p-5 rounded-3 shadow-md">
+    <h4 class="display-5">@Model.Make @Model.Model</h4>
+    <hr />
+    <img src="~/@Model.ImageUrl" width="50%" class="rounded-3 shadow mb-2" />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Make)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Make)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mileage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mileage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerID)
+        </dt>
+
+        <dd>
+            <p>@Model.USER_INFO.USER_FNAME @Model.USER_INFO.USER_LNAME</p>
+            <p>Contact: @Model.USER_INFO.USER_EMAIL</p>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+
+    </dl>
+    <p>
+        @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-outline-warning" })
+    </p>
+</div>

@@ -1,9 +1,25 @@
-﻿@{
+﻿@model IEnumerable<WheelsOnDeals.Models.CarListing>
+@{
     ViewBag.Title = "Home Page";
 }
 
 <main>
-    <div class="container">
-        <h2>Display all cars from the database here..</h2>
+    <div class="container mb-5">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-md" style="width: 18rem;">
+                        <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap" />
+                        <div class="card-body">
+                            <h4 class="card-title">@item.Make @item.Model</h4>
+                            <p class="card-text">Php <strong>@item.Price</strong></p>
+                            @Html.ActionLink("Details", "ListingDetails", new { id = item.CarID }, new { @class = "btn btn-outline-dark w-100" })
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
     </div>
 </main>

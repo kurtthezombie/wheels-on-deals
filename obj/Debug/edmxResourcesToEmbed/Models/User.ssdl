@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CAR_SELLINGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CarListing">
+    <Key>
+      <PropertyRef Name="CarID" />
+    </Key>
+    <Property Name="CarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Make" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="CarYear" Type="int" Nullable="false" />
+    <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Mileage" Type="int" Nullable="false" />
+    <Property Name="CarDescription" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="ImageUrl" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="OwnerID" Type="int" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USER_INFO">
+    <Key>
+      <PropertyRef Name="USER_IDN" />
+    </Key>
+    <Property Name="USER_IDN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="USER_EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="USER_FNAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="USER_LNAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="USER_PASSWORD" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__CarListin__Owner__4316F928">
+    <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="1" />
+    <End Role="CarListing" Type="Self.CarListing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER_INFO">
+        <PropertyRef Name="USER_IDN" />
+      </Principal>
+      <Dependent Role="CarListing">
+        <PropertyRef Name="OwnerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CAR_SELLINGModelStoreContainer">
+    <EntitySet Name="CarListing" EntityType="Self.CarListing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USER_INFO" EntityType="Self.USER_INFO" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CarListin__Owner__4316F928" Association="Self.FK__CarListin__Owner__4316F928">
+      <End Role="USER_INFO" EntitySet="USER_INFO" />
+      <End Role="CarListing" EntitySet="CarListing" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

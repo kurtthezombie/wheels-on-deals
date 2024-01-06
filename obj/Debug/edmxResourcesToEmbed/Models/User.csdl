@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CAR_SELLINGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="USER_INFO">
+    <Key>
+      <PropertyRef Name="USER_IDN" />
+    </Key>
+    <Property Name="USER_IDN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USER_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="USER_FNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="USER_LNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="USER_PASSWORD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CarListings" Relationship="CAR_SELLINGModel.FK__CarListin__Owner__3F466844" FromRole="USER_INFO" ToRole="CarListing" />
+  </EntityType>
+  <EntityContainer Name="AppDbContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="USER_INFO" EntityType="Self.USER_INFO" />
+    <EntitySet Name="CarListings" EntityType="CAR_SELLINGModel.CarListing" />
+    <AssociationSet Name="FK__CarListin__Owner__3F466844" Association="CAR_SELLINGModel.FK__CarListin__Owner__3F466844">
+      <End Role="USER_INFO" EntitySet="USER_INFO" />
+      <End Role="CarListing" EntitySet="CarListings" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CarListing">
+    <Key>
+      <PropertyRef Name="CarID" />
+    </Key>
+    <Property Name="CarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Make" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Model" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CarYear" Type="Int32" Nullable="false" />
+    <Property Name="Color" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="Mileage" Type="Int32" Nullable="false" />
+    <Property Name="CarDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ImageUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="OwnerID" Type="Int32" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" Nullable="false" />
+    <NavigationProperty Name="USER_INFO" Relationship="CAR_SELLINGModel.FK__CarListin__Owner__3F466844" FromRole="CarListing" ToRole="USER_INFO" />
+  </EntityType>
+  <Association Name="FK__CarListin__Owner__3F466844">
+    <End Type="CAR_SELLINGModel.USER_INFO" Role="USER_INFO" Multiplicity="1" />
+    <End Type="CAR_SELLINGModel.CarListing" Role="CarListing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER_INFO">
+        <PropertyRef Name="USER_IDN" />
+      </Principal>
+      <Dependent Role="CarListing">
+        <PropertyRef Name="OwnerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,50 @@
+﻿@model WheelsOnDeals.Models.USER_INFO
+
+@{
+    ViewBag.Title = "My Profile";
+}
+
+<div class="bg-light container p-5 rounded-3 shadow-md">
+    <h2 class="text-secondary">My profile</h2>
+    <h5 class="display-5 text-danger">@Model.USER_FNAME @Model.USER_LNAME</h5>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USER_EMAIL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USER_EMAIL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USER_FNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USER_FNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USER_LNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USER_LNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USER_PASSWORD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USER_PASSWORD)
+        </dd>
+    </dl>
+    <p>
+        @Html.ActionLink("✎", "EditProfile", null, new { id = Convert.ToInt32(Session["Session_UserId"]) }, new { @class = "btn btn-secondary" }) |
+        @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-outline-warning ml-2" })
+    </p>
+</div>
+

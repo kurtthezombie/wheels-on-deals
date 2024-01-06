@@ -13,10 +13,10 @@ namespace WheelsOnDeals.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CAR_SELLING_Entities : DbContext
+    public partial class AppDbContext : DbContext
     {
-        public CAR_SELLING_Entities()
-            : base("name=CAR_SELLING_Entities")
+        public AppDbContext()
+            : base("name=AppDbContext")
         {
         }
     
@@ -26,5 +26,6 @@ namespace WheelsOnDeals.Models
         }
     
         public virtual DbSet<USER_INFO> USER_INFO { get; set; }
+        public virtual DbSet<CarListing> CarListings { get; set; }
     }
 }

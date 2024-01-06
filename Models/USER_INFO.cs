@@ -13,9 +13,17 @@ namespace WheelsOnDeals.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-
+    using System.Web;
+    
     public partial class USER_INFO
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public USER_INFO()
+        {
+            this.CarListings = new HashSet<CarListing>();
+        }
+
+        [Display(Name = "ID")]
         public int USER_IDN { get; set; }
 
         [Display(Name = "Email")]
@@ -40,7 +48,10 @@ namespace WheelsOnDeals.Models
         [Required(ErrorMessage = "This field is required.")]
         [DataType(DataType.Password)]
         [NotMapped]
-        [Compare("USER_PASSWORD",ErrorMessage = "Password does not match, type again!")]
+        [Compare("USER_PASSWORD", ErrorMessage = "Password does not match, type again!")]
         public string ConfirmPassword { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CarListing> CarListings { get; set; }
     }
 }

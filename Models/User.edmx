@@ -4,7 +4,23 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CAR_SELLINGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CAR_SELLINGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CarListing">
+          <Key>
+            <PropertyRef Name="CarID" />
+          </Key>
+          <Property Name="CarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Make" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Model" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CarYear" Type="int" Nullable="false" />
+          <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Mileage" Type="int" Nullable="false" />
+          <Property Name="CarDescription" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ImageUrl" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="OwnerID" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="USER_INFO">
           <Key>
             <PropertyRef Name="USER_IDN" />
@@ -15,11 +31,27 @@
           <Property Name="USER_LNAME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="USER_PASSWORD" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
+        <Association Name="FK__CarListin__Owner__4316F928">
+          <End Role="USER_INFO" Type="Self.USER_INFO" Multiplicity="1" />
+          <End Role="CarListing" Type="Self.CarListing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="USER_IDN" />
+            </Principal>
+            <Dependent Role="CarListing">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CAR_SELLINGModelStoreContainer">
+          <EntitySet Name="CarListing" EntityType="Self.CarListing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_INFO" EntityType="Self.USER_INFO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CarListin__Owner__4316F928" Association="Self.FK__CarListin__Owner__4316F928">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="CarListing" EntitySet="CarListing" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CAR_SELLINGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -32,16 +64,51 @@
           <Property Name="USER_FNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USER_LNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USER_PASSWORD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CarListings" Relationship="CAR_SELLINGModel.FK__CarListin__Owner__3F466844" FromRole="USER_INFO" ToRole="CarListing" />
         </EntityType>
-        <EntityContainer Name="CAR_SELLING_Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="AppDbContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="USER_INFO" EntityType="Self.USER_INFO" />
+          <EntitySet Name="CarListings" EntityType="CAR_SELLINGModel.CarListing" />
+          <AssociationSet Name="FK__CarListin__Owner__3F466844" Association="CAR_SELLINGModel.FK__CarListin__Owner__3F466844">
+            <End Role="USER_INFO" EntitySet="USER_INFO" />
+            <End Role="CarListing" EntitySet="CarListings" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="CarListing">
+          <Key>
+            <PropertyRef Name="CarID" />
+          </Key>
+          <Property Name="CarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Make" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CarYear" Type="Int32" Nullable="false" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Mileage" Type="Int32" Nullable="false" />
+          <Property Name="CarDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ImageUrl" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="OwnerID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" Nullable="false" />
+          <NavigationProperty Name="USER_INFO" Relationship="CAR_SELLINGModel.FK__CarListin__Owner__3F466844" FromRole="CarListing" ToRole="USER_INFO" />
+        </EntityType>
+        <Association Name="FK__CarListin__Owner__3F466844">
+          <End Type="CAR_SELLINGModel.USER_INFO" Role="USER_INFO" Multiplicity="1" />
+          <End Type="CAR_SELLINGModel.CarListing" Role="CarListing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_INFO">
+              <PropertyRef Name="USER_IDN" />
+            </Principal>
+            <Dependent Role="CarListing">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CAR_SELLINGModelStoreContainer" CdmEntityContainer="CAR_SELLING_Entities">
+        <EntityContainerMapping StorageEntityContainer="CAR_SELLINGModelStoreContainer" CdmEntityContainer="AppDbContext">
           <EntitySetMapping Name="USER_INFO">
             <EntityTypeMapping TypeName="CAR_SELLINGModel.USER_INFO">
               <MappingFragment StoreEntitySet="USER_INFO">
@@ -50,6 +117,23 @@
                 <ScalarProperty Name="USER_FNAME" ColumnName="USER_FNAME" />
                 <ScalarProperty Name="USER_LNAME" ColumnName="USER_LNAME" />
                 <ScalarProperty Name="USER_PASSWORD" ColumnName="USER_PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarListings">
+            <EntityTypeMapping TypeName="CAR_SELLINGModel.CarListing">
+              <MappingFragment StoreEntitySet="CarListing">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="CarDescription" ColumnName="CarDescription" />
+                <ScalarProperty Name="Mileage" ColumnName="Mileage" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="CarYear" ColumnName="CarYear" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
